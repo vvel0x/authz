@@ -2,8 +2,8 @@
   "name": "@vvel0x/authz",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "scripts": {
     "build": "tsup src/index.ts",
     "start": "tsup src/index.ts --watch",
