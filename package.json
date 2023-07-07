@@ -1,5 +1,5 @@
 {
-  "name": "authz",
+  "name": "@vvel0x/authz",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.mjs",
@@ -13,11 +13,13 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    "default": "./dist/index.cjs",
+    "import": "./dist/index.js",
     "require": "./dist/index.cjs",
-    "import": "./dist/index.mjs",
-    "node": "./dist/index.cjs"
+    "types": "./dist/index.d.ts"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "publishConfig": {
     "access": "public"

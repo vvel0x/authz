@@ -1,10 +1,11 @@
-import type { Options } from 'tsup'
+import type { Options } from "tsup";
 
 const config: Options = {
-    entry: ['src/index.ts'],
-    dts: true,
-    sourcemap: true,
-    format: ['cjs', 'esm', 'iife'],
-}
+  entry: ["src/index.ts"],
+  dts: true,
+  sourcemap: true,
+  format: ["cjs", "esm"],
+  clean: true,
+};
 
-export default config
+export default config;
