@@ -13,12 +13,11 @@ const resources = {
 
 const policies: PolicyConfig<typeof resources, typeof roles> = {
   posts: {
-    user: ["read", "upvote", "downvote"],
-    moderator: ["create", "update"],
-    admin: ["delete"],
+    user: ["read", "create", "upvote", "downvote"],
+    moderator: ["update", "delete"],
   },
   comments: {
-    user: ["read"],
+    user: ["create", "read"],
     admin: ["*"],
   },
 };
@@ -30,28 +29,16 @@ test("user can read posts", () => {
   expect(authz.check("user", "read", "posts")).toBe(true);
 });
 
-test("user cannot create posts", () => {
-  expect(authz.check("user", "create", "posts")).toBe(false);
-});
-
-test("user cannot delete posts", () => {
-  expect(authz.check("user", "delete", "posts")).toBe(false);
-});
-
 test("user cannot update posts", () => {
   expect(authz.check("user", "update", "posts")).toBe(false);
-});
-
-test("user can upvote posts", () => {
-  expect(authz.check("user", "upvote", "posts")).toBe(true);
 });
 
 test("user can read comments", () => {
   expect(authz.check("user", "read", "comments")).toBe(true);
 });
 
-test("user cannot create comments", () => {
-  expect(authz.check("user", "create", "comments")).toBe(false);
+test("user cannot delete comments", () => {
+  expect(authz.check("user", "delete", "comments")).toBe(false);
 });
 
 test("moderator can read posts", () => {
@@ -62,12 +49,12 @@ test("moderator can create posts", () => {
   expect(authz.check("moderator", "create", "posts")).toBe(true);
 });
 
-test("moderator cannot delete posts", () => {
-  expect(authz.check("moderator", "delete", "posts")).toBe(false);
+test("moderator can delete posts", () => {
+  expect(authz.check("moderator", "delete", "posts")).toBe(true);
 });
 
-test("admin can read posts", () => {
-  expect(authz.check("admin", "read", "posts")).toBe(true);
+test("moderator cannot update comments", () => {
+  expect(authz.check("moderator", "update", "comments")).toBe(false);
 });
 
 test("admin can create posts", () => {
@@ -80,4 +67,8 @@ test("admin can delete posts", () => {
 
 test("admin can read comments", () => {
   expect(authz.check("admin", "read", "comments")).toBe(true);
+});
+
+test("admin can can delete comments", () => {
+  expect(authz.check("admin", "delete", "comments")).toBe(true);
 });
